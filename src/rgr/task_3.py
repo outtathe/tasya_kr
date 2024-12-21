@@ -26,19 +26,24 @@ def rotate(x_vals, y_vals, degrees):
     return rotated[0, :], rotated[1, :]
 
 def main():
+    plt.figure(figsize=(8, 7))
     x, y_plus, y_minus = generate_data()
-    x_rotated, y_rotated = rotate(x, y_plus, 90)
-    x_rotated2, y_rotated2 = rotate(x, y_minus, 90)
+    x_copy = 5
+    step = 360/x_copy
+    for i in range(x_copy):
+        angle = i * step
+        x_rotated, y_rotated = rotate(x, y_plus, angle)
+        x_rotated2, y_rotated2 = rotate(x, y_minus, angle)
 
-    plt.plot(x_rotated, y_rotated, label='Rotated $y = \sin(0.2\pi x)$')
-    plt.plot(x_rotated2, y_rotated2, label='Rotated $y = -\sin(0.2\pi x)$')
+        plt.plot(x_rotated, y_rotated)
+        plt.plot(x_rotated2, y_rotated2)
+
     plt.xlim([-10, 10])
     plt.ylim([-10, 10])
     plt.grid(True)
     plt.xlabel('x')
     plt.ylabel('y')
-    plt.title('Повернутые кривые(90°)')
-    plt.legend()
+    plt.title('Повернутые кривые')
     plt.show()
 
 if __name__ == '__main__':
